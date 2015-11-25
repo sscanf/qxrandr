@@ -3,16 +3,12 @@
 #include "qxrandr.h"
 #include "eventnotifier.h"
 
-//#include "../common/myxcbeventfilter.h"
-
-
-QXRandr::QXRandr(RROutput output, QObject *parent) :
+QXRandr::QXRandr(QString strDisplay, RROutput output, QObject *parent) :
     QObject(parent),
     m_output (output)
 {
 
-    qDebug() << "QXRandr new instance";
-    m_pDpy      = XOpenDisplay  (":0.0");
+    m_pDpy      = XOpenDisplay  (strDisplay.toLocal8Bit().data());
 //    qDebug() << m_pDpy;
 
     m_screen    = DefaultScreen (m_pDpy);
@@ -26,8 +22,6 @@ QXRandr::QXRandr(RROutput output, QObject *parent) :
 
 QXRandr::~QXRandr()
 {
-    qDebug() << "QXRandr destructor";
-
     XSync (m_pDpy,false);
     if (m_pRes)
         XRRFreeScreenResources(m_pRes);

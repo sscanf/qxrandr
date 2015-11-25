@@ -10,7 +10,7 @@
     #define Bool int
 #endif
 
-#include <X11/extensions/Xrandr.h>
+#include </usr/include/X11/extensions/Xrandr.h>
 
 class eventNotifier;
 
@@ -24,7 +24,7 @@ class QXRandr : public QObject
     Q_OBJECT
 
 public:
-    explicit QXRandr(RROutput output = 0, QObject *parent = 0);
+    explicit QXRandr(QString strDisplay, RROutput output = 0, QObject *parent = 0);
     ~QXRandr ();
 
     QList<QSize>        getOutputModes  ();
